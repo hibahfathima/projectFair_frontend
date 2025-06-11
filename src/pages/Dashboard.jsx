@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import Myproject from '../components/Myproject'
-import Profile from '../components/profile'
+import Profile from '../components/Profile'
 
 function Dashboard() {
   const [name,setName]=useState("")
