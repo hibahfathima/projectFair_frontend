@@ -7,8 +7,9 @@ import { getHomeProjectsApi } from '../services/allApi'
 import { isAuthTokenContext } from '../context/ContextShare'
 
 function Home() {
-    const [isLogin,setIsLogin]=useState(false)
+   
     const [homeProjects,setHomeProjects]=useState([])
+    const { isAuthToken } = useContext(isAuthTokenContext)
     
    
     
@@ -17,14 +18,7 @@ function Home() {
         console.log("hoem projects ",result)
         setHomeProjects(result.data)
     }
-    useEffect(()=>{
-        getHomeProject()
-    },[])
-    useEffect(()=>{
-        if(sessionStorage.getItem("token")){
-            setIsLogin(true)
-        }
-    },[])
+ 
     return (
         <>
             <div className='container-fluid p-5 ' style={{ height: '100vh', width: '100%', backgroundColor: '#3cb371', color: 'white' }}>
@@ -34,12 +28,11 @@ function Home() {
                             <h3>PROJECT FAIR</h3>
                             <h6>One Stop destination for all S/W Projects</h6>
                             {
-                              !isLogin?
-                               
-                                <Link to={'/login'} > <button className='btn btn-success p-1'>Get Started <i class="fa-solid fa-arrow-right ms-1"></i></button></Link>:
-                                 <Link to={'/dashboard'} > <button className='btn btn-success p-1'>MANAGE PROJECTS <i class="fa-solid fa-arrow-right ms-1"></i></button></Link>
-                            }
-                            
+  !isAuthToken ?
+  <Link to={'/login'} > <button className='btn btn-success p-1'>Get Started <i className="fa-solid fa-arrow-right ms-1"></i></button></Link> :
+  <Link to={'/dashboard'} > <button className='btn btn-success p-1'>MANAGE PROJECTS <i className="fa-solid fa-arrow-right ms-1"></i></button></Link>
+}
+
                         </div>
                     </Col>
                     <Col md={6} lg={6} className='mt-5'>

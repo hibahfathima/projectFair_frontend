@@ -14,7 +14,9 @@ function ContextShare({children}) {
 //create a state ,this state is used to share between components
 const[addProjectResponse,setAddProjectResponse]=useState({})
 const [editProjectResponse,setEditProjectResponse]=useState({})/////s2
-const [isAuthToken,setIsAuthToken]=useState(false)
+const [isAuthToken, setIsAuthToken] = useState(() => {
+  return sessionStorage.getItem('token') ? true : false;
+});
 
 
 

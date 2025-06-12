@@ -8,7 +8,7 @@ import { isAuthTokenContext } from '../context/ContextShare';
 function Header() {
   const {isAuthToken,setIsAuthToken}=useContext(isAuthTokenContext)
   const navigate=useNavigate()
-  const logOut=async=>{
+  const logOut=async()=>{
     if(sessionStorage.getItem('token')){
       sessionStorage.removeItem('token')
     }
@@ -29,11 +29,18 @@ function Header() {
            
            <i className="fa-brands fa-stack-overflow me-2 fs-3 text-warning "></i> <span style={{color:'white'}}>PROJECT FAIR</span>
           </Navbar.Brand></Link>
-          {isAuthToken? <button className='btn btn-warning'> <i class="fa-solid fa-right-from-bracket"></i> LOG OUT</button>:
-          <Link to={'/login'}>
-           <button className='btn btn-warning'onClick={logOut}> <i class="fa-solid fa-right-from-bracket"></i> LOGIN</button>
-          </Link>
-          }
+         {isAuthToken ? 
+  <button className='btn btn-warning' onClick={logOut}>
+    <i className="fa-solid fa-right-from-bracket"></i> LOG OUT
+  </button>
+:
+  <Link to={'/login'}>
+    <button className='btn btn-warning'>
+      <i className="fa-solid fa-right-from-bracket"></i> LOGIN
+    </button>
+  </Link>
+}
+
          
         </Container>
       </Navbar>
